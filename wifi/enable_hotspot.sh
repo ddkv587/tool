@@ -5,8 +5,10 @@ if [ $# -lt 1 ]; then
 	exit 1
 fi
 
-echo "=========== install dependence =========="
-sudo apt update && sudo apt install -y isc-dhcp-server hostapd
+if ! type hostapd &> /dev/null; then
+	echo "=========== install dependence ==========";
+	sudo apt update && sudo apt install -y isc-dhcp-server hostapd;
+fi
 
 echo "=========== update /etc/network/interfaces =========="
 sudo mv /etc/network/interfaces /etc/network/interfaces_bak
